@@ -1,0 +1,106 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Javascript Display</title>
+  <style>
+  .assignmentSeperation {
+    border: 2px #444 solid;
+    min-height: 200px;
+  }
+  #loopDisplay{
+    min-height: 120px;
+    background-color: #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+  #cookieDisplay{
+    height: 150px;
+    background: #ccc;
+  }
+  #playground{
+    height: 25px;
+    color: #8B0000;
+  }
+  </style>
+
+
+</head>
+
+<body>
+  <h1> JS Playground </h1>
+    <div id="cookieDisplay" >
+      <h2>Constant Cookie Display</h2>
+      <p id="currentCookies"></p>
+    </div>
+    <div id="playground"></div>
+
+    <input id="cookieText" type="text" />
+    <input id="createBTN" type="button" value="Create" onclick="writeCookie()" />
+    <input id="editBTN" type="button" value="Edit" onclick = "editCookie()"/>
+    <input id="readBTN" type="button" value="Read" onclick = "readCookie()"/>
+    <input id="deleteBTN" type="button" value="Delete" onclick = "deleteCookie()"/>
+  </div>
+
+
+
+
+  <script>
+  //for your convinience
+  //document.getElementById(playground)
+  //document.getElementById('actionBTN')
+  var globalvar = document.cookie;
+    //do your scripting here
+
+      function writeCookie(){
+        //or play with scripting here
+        document.getElementById('playground').innerHTML = "Cookies Made" //status
+        globalvar = document.getElementById('cookieText').value
+        document.cookie = globalvar; //updating cookie
+        document.getElementById('currentCookies').innerHTML = document.cookie; //display
+        return globalvar; //return granting access to string
+      }
+
+      function readCookie(){
+        document.getElementById('playground').innerHTML = "Cookies Read" //status
+        document.getElementById('currentCookies').innerHTML = document.cookie; //display
+        document.getElementById('cookieText').value = document.cookie; // making available to edit
+      }
+
+      function editCookie(){
+        if (document.cookie == document.getElementById('cookieText').value){
+          document.getElementById('playground').innerHTML = "No Changes Entered"; //status
+          document.getElementById('currentCookies').innerHTML = document.cookie; //display
+        } else if (document.getElementById('cookieText').value == "") {
+          document.getElementById('playground').innerHTML = "No Text Entered";//status
+          document.getElementById('currentCookies').innerHTML = document.cookie;//display
+        }
+        else if (!document.getElementById('cookieText').value.includes("=")) {
+          document.getElementById('playground').innerHTML = "No key value pair";//status
+          document.getElementById('currentCookies').innerHTML = document.cookie;//display
+        }
+        else {
+          document.getElementById('playground').innerHTML = "Cookies Updated"; //status
+          globalvar = document.getElementById('cookieText').value;
+          document.cookie = globalvar; //updating cookie
+          document.getElementById('currentCookies').innerHTML = document.cookie;//display
+        }
+
+        return globalvar; //return updateing access to string
+      }
+
+      function deleteCookie(){
+        document.getElementById('playground').innerHTML = "Cookies Deleted" //status
+        var now = new Date(); //creating a date
+        globalvar+="; Expires = " + now.toUTCString() + ";"; //adding dat as a UTC timestamp to the string
+        document.cookie = globalvar; //updating cookie
+        document.getElementById('currentCookies').innerHTML = document.cookie; //display
+        return globalvar;
+      }
+
+
+  </script>
+</body>
+</html>
